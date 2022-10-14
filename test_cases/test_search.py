@@ -26,25 +26,21 @@ class Test_003_search:
         self.i = Search(self.driver)
 
         search_array = self.product_search_criteria.split(",")
-        # print(search_array)
 
         for i in range(len(search_array)):
             if i <= 0:
-                # print(search_array[0])
                 self.i.set_search_criteria_parameter(search_array[0])
                 self.i.click_submit_search()
                 self.i.clear_search_field()
                 self.i.confirm_product_name_blouse()
 
             elif i == 1:
-                # print(search_array[1])
                 self.i.set_search_criteria_parameter(search_array[1])
                 self.i.click_submit_search()
                 self.i.clear_search_field()
                 self.i.confirm_product_name_tshirts()
 
             elif i == 2:
-                # print(search_array[2])
                 self.i.set_search_criteria_parameter(search_array[2])
                 self.i.click_submit_search()
                 self.i.clear_search_field()

@@ -1,7 +1,10 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.core import driver
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support import expected_conditions as EC
+
 
 
 class SignUp:
@@ -31,7 +34,10 @@ class SignUp:
         self.driver = driver
 
     def click_signin_dashboard(self):
-        self.driver.find_element(By.XPATH, self.button_signin_dashboard_xpath).click()
+        wait = WebDriverWait(self.driver, 5)
+        click_sign_dashboard = wait.until(EC.visibility_of_element_located
+                                          ((By.XPATH, self.button_signin_dashboard_xpath)))
+        click_sign_dashboard.click()
 
     def set_user_email(self, email):
 
@@ -40,7 +46,10 @@ class SignUp:
         signup_email_field.send_keys(email)
 
     def click_create_account(self):
-        self.driver.find_element(By.XPATH, self.button_create_account_xpath).click()
+        wait = WebDriverWait(self.driver, 5)
+        click_create_account = wait.until(EC.visibility_of_element_located
+                                          ((By.XPATH, self.button_create_account_xpath)))
+        click_create_account.click()
 
     def set_first_name(self, first_name):
         firstname_field = self.driver.find_element(By.XPATH, self.textbox_fname_xpath)

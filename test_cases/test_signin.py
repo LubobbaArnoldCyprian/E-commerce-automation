@@ -15,3 +15,4 @@ class Test_002_signin:
         self.si.set_email(self.email)
         self.si.set_password(self.password)
         self.si.click_signin()
+        self.driver.close()

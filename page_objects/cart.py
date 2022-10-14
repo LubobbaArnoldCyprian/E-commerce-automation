@@ -3,6 +3,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver import ActionChains
 import time
 import re
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class Cart:
@@ -41,18 +43,14 @@ class Cart:
         # int converts string to integer
         # re.sub is used to remove all non-numeric characters and only remain with characters in range of 1 and 9
         unit_price = int(re.sub(r'[^0-9]', '', original_unit_price))
-        print(unit_price)
-        time.sleep(3)
+
 
         self.driver.find_element(By.XPATH, self.proceed_to_checkout_xpath).click()
-        time.sleep(5)
 
         original_quantity = self.driver.find_element(By.XPATH, self.product_quantity_xpath).text
         # original_quantity = self.driver.find_element(By.CSS_SELECTOR, self.quantity_ccs_selector).text
         quantity = int(re.sub(r'[^0-9]', '', original_quantity))
         # quantity = str(original_quantity)
-        print(quantity)
-        time.sleep(3)
 
         final_total = unit_price * quantity
         print(final_total)
@@ -62,7 +60,6 @@ class Cart:
         # re.sub is used to remove all non-numeric characters and only remain with characters in range of 1 and 9
         real_total = int(re.sub(r'[^0-9]', '', overall_total))
         print(real_total)
-        time.sleep(3)
 
         # verifying displayed total matches calculated total
         assert final_total == real_total, f"total doesn't match" \
@@ -73,7 +70,7 @@ class Cart:
         action_chains1 = ActionChains(self.driver)
         action_chains1.move_to_element(view_cart)
         action_chains1.perform()
-        time.sleep(4)
 
-        empty_shopping_cart = self.driver.find_element(By.XPATH, self.empty_shopping_cart_xpath)
+        wait = WebDriverWait(self.driver, 5)
+        empty_shopping_cart = wait.until(EC.element_to_be_clickable((By.XPATH, self.empty_shopping_cart_xpath)))
         empty_shopping_cart.click()

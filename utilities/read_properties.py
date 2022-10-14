@@ -2,8 +2,8 @@ import configparser
 
 config = configparser.RawConfigParser()
 # Incase you're using Mac-Os use command below
-# config.read("../Configurations/config.ini")
-config.read(".\\Configurations\\config.ini")
+# config.read("./configurations/config.ini")
+config.read(".\\configurations\\config.ini")
 
 
 class ReadConfig:
